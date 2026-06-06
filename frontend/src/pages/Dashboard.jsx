@@ -18,8 +18,8 @@ const Dashboard = () => {
     try {
       setLoading(true);
 
-      const response = await axios.get(
-        `http://localhost:5000/api/companies/pagination/list?page=${page}&limit=4`,
+      const response = await await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/companies/pagination/list?page=${page}&limit=4`,
       );
 
       setCompanies(response.data.companies);
@@ -45,7 +45,7 @@ const Dashboard = () => {
       }
 
       const response = await axios.get(
-        `http://localhost:5000/api/companies/search?search=${value}`,
+        `${import.meta.env.VITE_API_URL}/api/companies/search?search=${value}`,
       );
 
       setCompanies(response.data.companies);
@@ -63,7 +63,7 @@ const Dashboard = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/companies/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/companies/${id}`);
 
       alert("Company Deleted Successfully");
 
@@ -84,9 +84,12 @@ const Dashboard = () => {
     try {
       const ids = companies.map((company) => company._id);
 
-      await axios.delete("http://localhost:5000/api/companies/multi/delete", {
-        data: { ids },
-      });
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/api/companies/multi/delete`,
+        {
+          data: { ids },
+        },
+      );
 
       alert("All Companies Deleted");
 

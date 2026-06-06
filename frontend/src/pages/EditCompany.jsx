@@ -23,7 +23,7 @@ const EditCompany = () => {
   const getCompany = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/companies/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/companies/${id}`,
       );
 
       setCompany(response.data.company);
@@ -43,7 +43,10 @@ const EditCompany = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:5000/api/companies/${id}`, company);
+      await axios.put(
+        `${import.meta.env.VITE_API_URL}/api/companies/${id}`,
+        company,
+      );
 
       alert("Company Updated Successfully");
 

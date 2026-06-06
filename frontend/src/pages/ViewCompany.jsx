@@ -16,7 +16,7 @@ const ViewCompany = () => {
   const getCompany = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/companies/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/companies/${id}`,
       );
 
       setCompany(response.data.company);
