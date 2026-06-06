@@ -14,6 +14,10 @@ const EditCompany = () => {
     email: "",
     website: "",
     category: "",
+    facebook: "",
+    instagram: "",
+    linkedin: "",
+    tags: "",
   });
 
   useEffect(() => {
@@ -26,7 +30,12 @@ const EditCompany = () => {
         `${import.meta.env.VITE_API_URL}/api/companies/${id}`,
       );
 
-      setCompany(response.data.company);
+      const companyData = response.data.company;
+
+      setCompany({
+        ...companyData,
+        tags: companyData.tags?.join(", ") || "",
+      });
     } catch (error) {
       console.log(error);
     }
@@ -43,9 +52,17 @@ const EditCompany = () => {
     e.preventDefault();
 
     try {
+      const payload = {
+        ...company,
+        tags: company.tags
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter(Boolean),
+      };
+
       await axios.put(
         `${import.meta.env.VITE_API_URL}/api/companies/${id}`,
-        company,
+        payload,
       );
 
       alert("Company Updated Successfully");
@@ -124,6 +141,62 @@ const EditCompany = () => {
               onChange={handleChange}
               className="w-full border rounded-md p-3"
             />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-medium">Facebook</label>
+
+            <input
+              type="text"
+              name="facebook"
+              value={company.facebook}
+              onChange={handleChange}
+              placeholder="https://facebook.com/company"
+              className="w-full border rounded-md p-3"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-medium">Instagram</label>
+
+            <input
+              type="text"
+              name="instagram"
+              value={company.instagram}
+              onChange={handleChange}
+              placeholder="https://instagram.com/company"
+              className="w-full border rounded-md p-3"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-medium">LinkedIn</label>
+
+            <input
+              type="text"
+              name="linkedin"
+              value={company.linkedin}
+              onChange={handleChange}
+              placeholder="https://linkedin.com/company/company"
+              className="w-full border rounded-md p-3"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-medium">Tags</label>
+
+            <input
+              type="text"
+              name="tags"
+              value={company.tags}
+              onChange={handleChange}
+              placeholder="IT, Software, AI, Cloud"
+              className="w-full border rounded-md p-3"
+            />
+
+            <p className="text-sm text-gray-500 mt-1">
+              Separate tags with commas (,)
+            </p>
           </div>
 
           <div>

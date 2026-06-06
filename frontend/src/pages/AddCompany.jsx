@@ -12,6 +12,10 @@ const AddCompany = () => {
     email: "",
     website: "",
     category: "",
+    facebook: "",
+    instagram: "",
+    linkedin: "",
+    tags: "",
   });
 
   const handleChange = (e) => {
@@ -25,16 +29,23 @@ const AddCompany = () => {
     e.preventDefault();
 
     try {
+      const payload = {
+        ...company,
+        tags: company.tags
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter(Boolean),
+      };
+
       await axios.post(
         `${import.meta.env.VITE_API_URL}/api/companies`,
-        company,
+        payload,
       );
-      alert("Company Added Successfully");
 
+      alert("Company Added Successfully");
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
-
       alert(error.response?.data?.message || "Something went wrong");
     }
   };
@@ -47,7 +58,6 @@ const AddCompany = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block mb-1 font-medium">Company Name</label>
-
             <input
               type="text"
               name="name"
@@ -61,7 +71,6 @@ const AddCompany = () => {
 
           <div>
             <label className="block mb-1 font-medium">Phone</label>
-
             <input
               type="text"
               name="phone"
@@ -75,7 +84,6 @@ const AddCompany = () => {
 
           <div>
             <label className="block mb-1 font-medium">Email</label>
-
             <input
               type="email"
               name="email"
@@ -88,7 +96,6 @@ const AddCompany = () => {
 
           <div>
             <label className="block mb-1 font-medium">Website</label>
-
             <input
               type="text"
               name="website"
@@ -101,7 +108,6 @@ const AddCompany = () => {
 
           <div>
             <label className="block mb-1 font-medium">Category</label>
-
             <input
               type="text"
               name="category"
@@ -113,8 +119,58 @@ const AddCompany = () => {
           </div>
 
           <div>
-            <label className="block mb-1 font-medium">Address</label>
+            <label className="block mb-1 font-medium">Facebook</label>
+            <input
+              type="text"
+              name="facebook"
+              value={company.facebook}
+              onChange={handleChange}
+              placeholder="https://facebook.com/company"
+              className="w-full border rounded-md p-3"
+            />
+          </div>
 
+          <div>
+            <label className="block mb-1 font-medium">Instagram</label>
+            <input
+              type="text"
+              name="instagram"
+              value={company.instagram}
+              onChange={handleChange}
+              placeholder="https://instagram.com/company"
+              className="w-full border rounded-md p-3"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-medium">LinkedIn</label>
+            <input
+              type="text"
+              name="linkedin"
+              value={company.linkedin}
+              onChange={handleChange}
+              placeholder="https://linkedin.com/company/company"
+              className="w-full border rounded-md p-3"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-medium">Tags</label>
+            <input
+              type="text"
+              name="tags"
+              value={company.tags}
+              onChange={handleChange}
+              placeholder="IT, Software, AI, Cloud"
+              className="w-full border rounded-md p-3"
+            />
+            <p className="text-sm text-gray-500 mt-1">
+              Separate tags with commas (,)
+            </p>
+          </div>
+
+          <div>
+            <label className="block mb-1 font-medium">Address</label>
             <textarea
               name="address"
               value={company.address}
