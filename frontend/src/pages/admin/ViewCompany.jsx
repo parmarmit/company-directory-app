@@ -154,14 +154,13 @@ const ViewCompany = () => {
 
         <div className="mt-8 flex gap-3">
           <button
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/admin/dashboard")}
             className="bg-gray-600 text-white px-6 py-3 rounded-md hover:bg-gray-700"
           >
             Back
           </button>
-
           <button
-            onClick={() => navigate(`/edit-company/${company._id}`)}
+            onClick={() => navigate(`/admin/edit-company/${company._id}`)}
             className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700"
           >
             Edit Company

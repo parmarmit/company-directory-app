@@ -24,7 +24,7 @@ const Login = () => {
 
       alert("Login Successful");
 
-      navigate("/dashboard");
+      navigate("/admin/dashboard");
     } catch (error) {
       alert(error.response?.data?.message || "Login Failed");
     }

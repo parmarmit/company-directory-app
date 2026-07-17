@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/company-logo.png";
+import logo from "../../assets/company-logo.png";
 
 const Dashboard = () => {
   const [companies, setCompanies] = useState([]);
@@ -101,17 +101,17 @@ const Dashboard = () => {
 
   // View Company
   const viewCompany = (id) => {
-    navigate(`/view-company/${id}`);
+    navigate(`/admin/view-company/${id}`);
   };
 
   // Edit Company
   const editCompany = (id) => {
-    navigate(`/edit-company/${id}`);
+    navigate(`/admin/edit-company/${id}`);
   };
 
   // Add Company
   const addCompany = () => {
-    navigate("/add-company");
+    navigate("/admin/add-company");
   };
 
   // Logout
@@ -183,6 +183,13 @@ const Dashboard = () => {
             className="bg-red-600 text-white px-5 py-3 rounded-lg hover:bg-red-700"
           >
             Delete All
+          </button>
+
+          <button
+            onClick={() => navigate("/admin/applications")}
+            className="bg-indigo-600 text-white px-5 py-3 rounded-lg hover:bg-indigo-700"
+          >
+            Applications
           </button>
         </div>
 
