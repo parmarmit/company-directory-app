@@ -2,6 +2,7 @@ import express from "express";
 
 import {
   applyCompany,
+  getUserApplications,
   getApplications,
   deleteApplication,
   updateApplicationStatus,
@@ -10,6 +11,8 @@ import {
 const router = express.Router();
 
 router.post("/", applyCompany);
+
+router.get("/user/:userId", getUserApplications);
 
 router.get("/", getApplications);
 

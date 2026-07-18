@@ -117,3 +117,25 @@ export const updateApplicationStatus = async (req, res) => {
     });
   }
 };
+
+// GET USER APPLICATIONS
+
+export const getUserApplications = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const applications = await Application.find({ userId }).populate(
+      "companyId",
+    );
+
+    return res.status(200).json({
+      success: true,
+      applications,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

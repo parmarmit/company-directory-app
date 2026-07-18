@@ -26,7 +26,10 @@ const MyApplications = () => {
 
   const fetchApplications = async () => {
     try {
-      const response = await api.get("/api/applications");
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      const response = await api.get(`/api/applications/user/${user._id}`);
+
       setApplications(response.data.applications);
     } catch (error) {
       console.log(error);
